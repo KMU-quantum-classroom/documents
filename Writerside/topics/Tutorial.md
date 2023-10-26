@@ -7,8 +7,6 @@ It also shows how to pass options to the conversion service, such as expression 
 ## Before you start
 
 ```Python
-import warnings
-
 from qiskit import QuantumCircuit, transpile
 from qiskit_aer import AerSimulator
 
@@ -51,6 +49,12 @@ result = sample_converter.convert(input_value=quantum_circuit)
 ```
 
 You will get the variables : ```result["gate"]```, ```result["name"]```, ```result["result"]```
+
+```result["gate"]``` : gate matrix list values before are computed.
+
+```result["name"]``` : gate name list values before are computed.
+
+```result["result"]``` : final result is the calculated matrix.
 
 The raw option creates it as variable that can be used with latex syntax.
 

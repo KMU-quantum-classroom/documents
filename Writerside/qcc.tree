@@ -9,4 +9,5 @@
     <toc-element topic="Overview.md"/>
     <toc-element topic="How-to-install.md"/>
     <toc-element topic="Tutorial.md"/>
+    <toc-element topic="Gui-guide.md"/>
 </instance-profile>
