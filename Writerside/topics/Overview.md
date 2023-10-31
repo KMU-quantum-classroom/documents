@@ -5,14 +5,12 @@ This is an overview document page for the Qiskit classroom converter.
 The Qiskit classroom converter contains a Python package that can convert different expressions used in Qiskit, 
 such as quantum circuits, matrices, and bra-ket notations. 
 
-The package is based on the Qiskit library, which is an open-source library for quantum computing.
-
-## Support convert method
-
 * quantum circuit to bra-ket notation
 * quantum circuit to matrix
 * matrix to quantum circuit
 * string to bra-ket notation
+
+The package is based on the Qiskit library, which is an open-source library for quantum computing.
 
 ---
 
