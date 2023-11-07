@@ -1,4 +1,4 @@
-# Gui guide
+# GUI guide
 
 ## Qiskit-classroom User Guide
 

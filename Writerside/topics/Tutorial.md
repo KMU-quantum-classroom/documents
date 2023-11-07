@@ -38,6 +38,24 @@ counts = backend.run(qc_compiled).result().get_counts()
 
 You will get the variables : quantum_circuit, qc_compiled's counts
 
+* quantum_circuit
+```Text
+text : 
+     ┌───┐┌──────────┐┌─┐   
+q_0: ┤ X ├┤0         ├┤M├───
+     └───┘│  CX gate │└╥┘┌─┐
+q_1: ─────┤1         ├─╫─┤M├
+          └──────────┘ ║ └╥┘
+c: 2/══════════════════╩══╩═
+                       0  1   
+```
+
+* qc_compiled's counts
+```Python
+  
+{'11': 1024}
+```
+
 ## quantum circuit to matrix
 
 ```Python
@@ -45,16 +63,38 @@ quantum_circuit = QuantumCircuit(2, 2)
 quantum_circuit.x(0)
 quantum_circuit.cx(0, 1)
 sample_converter = ConversionService(conversion_type="QC_TO_MATRIX")
-result = sample_converter.convert(input_value=quantum_circuit)
+var = sample_converter.convert(input_value=quantum_circuit)
 ```
 
-You will get the variables : ```result["gate"]```, ```result["name"]```, ```result["result"]```
+You will get the variables : ```var["gate"]```, ```var["name"]```, ```var["result"]```
 
-```result["gate"]``` : gate matrix list values before are computed.
+```var["gate"]``` : gate matrix list values before are computed.
 
-```result["name"]``` : gate name list values before are computed.
+```Python
+[array([[0.+0.j, 1.+0.j, 0.+0.j, 0.+0.j],
+       [1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],
+       [0.+0.j, 0.+0.j, 0.+0.j, 1.+0.j],
+       [0.+0.j, 0.+0.j, 1.+0.j, 0.+0.j]]),
+ array([[1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],
+       [0.+0.j, 0.+0.j, 0.+0.j, 1.+0.j],
+       [0.+0.j, 0.+0.j, 1.+0.j, 0.+0.j],
+       [0.+0.j, 1.+0.j, 0.+0.j, 0.+0.j]])]
+```
 
-```result["result"]``` : final result is the calculated matrix.
+```var["name"]``` : gate name list values before are computed.
+
+```Python
+[(0, ['I_{q1}', 'X_{q0}']), (1, ['CX_{q0, q1}'])]
+```
+
+```var["result"]``` : final result is the calculated matrix.
+
+```Python
+array([[0.+0.j, 1.+0.j, 0.+0.j, 0.+0.j],
+       [0.+0.j, 0.+0.j, 1.+0.j, 0.+0.j],
+       [0.+0.j, 0.+0.j, 0.+0.j, 1.+0.j],
+       [1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j]])
+```
 
 The raw option creates it as variable that can be used with latex syntax.
 
@@ -75,10 +115,20 @@ result = sample_converter.convert(input_value=quantum_circuit)
 
 You will get the variables : ```result```
 
+```text
+(sqrt(2)/2)*|0> + (sqrt(2)/2)*|11>
+```
+
 The raw option creates it as variable that can be used with latex syntax.
 
 ```Python
 ConversionService(conversion_type="QC_TO_BRA_KET", option={"print": "raw"})
+```
+
+```tex
+\begin{equation}
+\\frac{\\sqrt{2}}{2} |00\\rangle+\\frac{\\sqrt{2}}{2} |11\\rangle
+\end{equation}
 ```
 
 You can also add options like below:
@@ -98,7 +148,15 @@ sample_converter = ConversionService(conversion_type="STR_TO_BRA_KET")
 result = sample_converter.convert(input_value="sqrt(2)*|00>/2+sqrt(2)*|11>/2")
 ```
 
-You will get the variables : ```result```
+You will get the (sympy) variables : ```result```
+
+```Python
+type(result)
+```
+
+```text
+<class 'sympy.core.add.Add'>
+```
 
 The raw option creates it as variable that can be used with latex syntax.
 
